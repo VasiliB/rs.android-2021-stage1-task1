@@ -4,59 +4,58 @@ class StringParser {
 
     // TODO: Complete the following function
     fun getResult(inputString: String): Array<String?> {
-        var c = 0
-        var i = 0
-        var m = 0
-        var l = 0
+        var bufferIndex = 0
+        var index = 0
+        var resultIndex = 0
         var closingBracket: Char? = null
         //Создать итговый массив
         var result: Array<String?> = arrayOfNulls(inputString.length)
         //Преобразовать в массив символов
-        val media = inputString.toCharArray()
         //Создать строку для записи элемента в новый массив
         var buffer = ""
-        val inatialArray = inputString.toCharArray()
         //Создать массив для перевода в строку
-        lateinit var inprogress: Array<Char>
         //Поиск скобок
 
-        while (i < inputString.length) {
-            if (inputString[i] == '<' || inputString[i] == '[' || inputString[i] == '(') {
-                when (inputString[i]) {
+        while (index < inputString.length) {
+            if (inputString[index] == '<' || inputString[index] == '[' || inputString[index] == '(') {
+                var openBracket = index
+                when (inputString[index]) {
                     '<' -> closingBracket = '>'
                     '[' -> closingBracket = ']'
                     '(' -> closingBracket = ')'
                 }
-                while (inputString[i] != closingBracket) {
-//                    var b = inputString[i]
-                    buffer = buffer.padEnd(c, inputString[i])
-                    c++
-                    i++
+                while (inputString[index] != closingBracket) {
+                    buffer = buffer.padEnd(bufferIndex, inputString[index])
+                    bufferIndex++
+                    index++
                 }
-                if (inputString[i] == closingBracket) {
-                    result[m] = buffer
-                    m++
-                    l++
+                if (inputString[index] == closingBracket) {
+                    result[resultIndex] = buffer
+//                    println(buffer)
+                    buffer = ""
+                    bufferIndex = 0
+//                    println(buffer)
+                    resultIndex++
+                    if (index != inputString.lastIndex) {
+                        index = openBracket +1
+                    }
                 }
             }
+            index++
         }
-
         //Если элемент <, ( или [ искать до следующего такого же, затем передать элемент массиву
         //Начать поиск с последнего найденного индекса
         //Если нет закрывающей скобки, продолжить поиск без записи
-        println(buffer)
-        m -= 1
-        println(m)
+//        println(buffer)
+        resultIndex -= 1
+//        println(resultIndex)
 
-        val finalResult = arrayOfNulls<String>(m + 1)
-        for (y in 0..m) {
+        val finalResult = arrayOfNulls<String>(resultIndex + 1)
+        for (y in 0..resultIndex) {
             finalResult[y] = result[y]
         }
-        finalResult.forEach(System.out::print)
+        println(finalResult.contentToString())
         return finalResult
     }
 }
 
-private operator fun String.set(c: Int, value: Char) {
-
-}

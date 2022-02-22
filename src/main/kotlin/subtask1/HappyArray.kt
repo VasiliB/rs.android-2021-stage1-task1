@@ -82,3 +82,69 @@ class HappyArray {
 
     }
 }
+//
+//fun convertToHappy(sadArray: IntArray): IntArray {
+//    return if (sadArray.isEmpty()) {
+//        sadArray
+//    } else {
+//        return if (ifArrayHappy(sadArray)) {
+//            sadArray
+//        } else {
+//            convert(sadArray)
+//        }
+//    }
+//}
+//
+//private fun ifArrayHappy(array: IntArray) : Boolean {
+//    array.forEachIndexed { index, element  ->
+//        if (index != 0  && index != array.lastIndex) {
+//            val isHappy = isElementHappy(element, array[index -1], array[index +1])
+//            if (!isHappy) return false
+//        }
+//    }
+//    return true
+//}
+//
+//fun convert(sadArray: IntArray): IntArray {
+//    var result = sadArrayConvert(sadArray)
+//    var happy = result.happy
+//    return if (happy) {
+//        result.array
+//    } else {
+//        while (!happy) {
+//            result = sadArrayConvert(result.array)
+//            happy = result.happy
+//        }
+//        result.array
+//    }
+//}
+//
+//private fun isElementHappy (element: Int, previous: Int, next:Int): Boolean {
+//    return previous + next > element
+//}
+//
+//class Result(var array:IntArray, var happy: Boolean)
+//
+//private fun sadArrayConvert(sadArray: IntArray) : Result {
+//    val happyList = mutableListOf<Int>()
+//    val sadList = sadArray.toMutableList()
+//
+//    sadArray.forEachIndexed { index, element->
+//        if (index == 0 ) {
+//            happyList.add(sadArray[0])
+//        }
+//        if (index != 0 && index != sadArray.lastIndex) {
+//            if (isElementHappy(element, sadArray[index -1], sadArray[index +1])) {
+//                happyList.add(element)
+//            } else {
+//                sadList.remove(element)
+//                return Result(sadList.toIntArray(), false)
+//            }
+//        }
+//        if (index == sadArray.lastIndex) {
+//            happyList.add(sadArray[sadArray.lastIndex])
+//        }
+//
+//    }
+//    return Result(happyList.toIntArray(), true)
+//}
